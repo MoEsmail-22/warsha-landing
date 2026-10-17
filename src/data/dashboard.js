@@ -1,11 +1,11 @@
 // ✏️ Sample data shown in the service-center dashboard mockup. Every text is [English, Arabic].
 export const MD = {
-  user: { n: ["Ahmed", "أحمد"], full: ["Ahmed Auto Service", "خدمة أحمد للسيارات"], role: ["Owner", "المالك"] },
+  user: { n: ["Ahmed", "أحمد"], full: ["Ahmed Auto Service", "مركز أحمد لخدمة السيارات"], role: ["Owner", "المالك"] },
   kpi: [
-    { ic: "calchk", t: ["Today's bookings", "حجوزات اليوم"], v: 12, d: ["+3 vs yesterday", "+3 مقارنة بالأمس"], up: true },
-    { ic: "car", t: ["Cars in service", "سيارات قيد الصيانة"], v: 5, d: ["2 awaiting approval", "2 بانتظار الموافقة"] },
-    { ic: "wallet", t: ["Revenue today", "إيرادات اليوم"], v: 8450, egp: true, d: ["+12% vs yesterday", "+12% مقارنة بالأمس"], up: true },
-    { ic: "star", t: ["Average rating", "متوسط التقييم"], v: 4.8, dec: 1, d: ["126 reviews", "126 تقييم"], am: true },
+    { ic: "calchk", t: ["Today's bookings", "حجوزات اليوم"], v: 12, d: { n: "+3", t: ["vs yesterday", "مقارنة بالأمس"] }, up: true },
+    { ic: "car", t: ["Cars in service", "سيارات قيد الصيانة"], v: 5, d: { n: "2", t: ["awaiting approval", "بانتظار الموافقة"] } },
+    { ic: "wallet", t: ["Revenue today", "إيرادات اليوم"], v: 8450, egp: true, d: { n: "+12%", t: ["vs yesterday", "مقارنة بالأمس"] }, up: true },
+    { ic: "star", t: ["Average rating", "متوسط التقييم"], v: 4.8, dec: 1, d: { n: "126", t: ["reviews", "تقييمًا"] }, am: true },
   ],
   week: [6200, 7400, 5800, 8900, 9600, 4100, 7300], // Sun → Sat; today's bar always shows "Revenue today"
   sched: [
@@ -43,7 +43,7 @@ export const CATEGORY = {
   maintenance: ["Maintenance", "صيانة"],
   repair: ["Repair", "إصلاح"],
   diagnostics: ["Diagnostics", "تشخيص"],
-  bodywork: ["Bodywork", "أعمال الهيكل"],
+  bodywork: ["Bodywork", "سمكرة"],
 };
 
 export const DAYS = [["Sun", "الأحد"], ["Mon", "الإثنين"], ["Tue", "الثلاثاء"], ["Wed", "الأربعاء"], ["Thu", "الخميس"], ["Fri", "الجمعة"], ["Sat", "السبت"]];

@@ -20,10 +20,9 @@ export const makeFormat = (isAr) => {
     if (mi > 0) p.push(`${mi} min`);
     return p.join(" ");
   };
-  const price = (p) => `${nf(p[0])} - ${nf(p[1])} ${egp()}`;
-  const greet = () => {
-    const h = new Date().getHours();
-    return T(h < 12 ? ["Good morning", "صباح الخير"] : h < 17 ? ["Good afternoon", "مساء الخير"] : h < 21 ? ["Good evening", "مساء الخير"] : ["Good night", "ليلة هادئة"]);
-  };
-  return { T, nf, dg, egp, fdate, ymd, duration, price, greet, locale };
+  const price = (p) => `${nf(p[0])} – ${nf(p[1])} ${egp()}`;
+  // "+12%" → "+١٢٪" in Arabic; render inside <bdi dir="ltr"> so the sign stays in front
+  const num = (s) => (isAr ? dg(s).replace("%", "٪") : s);
+  const greet = () => T(["Good morning", "صباح الخير"]);
+  return { T, nf, dg, num, egp, fdate, ymd, duration, price, greet, locale };
 };

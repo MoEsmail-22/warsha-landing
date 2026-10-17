@@ -40,7 +40,7 @@ function DashScreen({ fmt, sel, onSelect, onNavigate, firstKpi }) {
     <>
       <div className="m-h">
         <h4>{fmt.greet()}{T([", ", "، "])}{T(MD.user.n)} 👋</h4>
-        <p>{T(["Here's what's happening at your workshop today.", "إليك ما يحدث في ورشتك اليوم."])}</p>
+        <p>{T(["Here's what's happening at your workshop today.", "إليك ملخص يومك في الورشة."])}</p>
       </div>
       <div className="m-kpis">
         {MD.kpi.map((k, i) => {
@@ -53,7 +53,7 @@ function DashScreen({ fmt, sel, onSelect, onNavigate, firstKpi }) {
                 {k.egp && <small>{egp()}</small>}
               </strong>
               <span>{T(k.t)}</span>
-              <p className={k.up ? "up" : ""}>{k.up && <MIcon name="up" size={10} />}{dg(T(k.d))}</p>
+              <p className={k.up ? "up" : ""}>{k.up && <MIcon name="up" size={10} />}<bdi dir="ltr">{fmt.num(k.d.n)}</bdi> {T(k.d.t)}</p>
             </div>
           );
         })}
@@ -82,11 +82,11 @@ function DashScreen({ fmt, sel, onSelect, onNavigate, firstKpi }) {
           <div className="m-rh">
             <div>
               <b>{T(["Revenue this week", "إيرادات الأسبوع"])}</b>
-              <small>{T(["Tap a bar to see details", "اضغط على عمود لرؤية التفاصيل"])}</small>
+              <small>{T(["Tap a bar to see details", "اضغط على أي عمود لعرض التفاصيل"])}</small>
             </div>
             <div className="m-sel">
               <small>{T(DAYS[sel])}</small>
-              <strong>{egp()} {nf(wk[sel])}</strong>
+              <strong>{fmt.locale === "ar-EG" ? `${nf(wk[sel])} ${egp()}` : `${egp()} ${nf(wk[sel])}`}</strong>
             </div>
           </div>
           <div className="m-tot">
@@ -150,13 +150,13 @@ function BookingsScreen({ fmt, newBooking }) {
           <span key={i} className={`m-tab${i ? "" : " on"}`}>{T(l)}</span>
         ))}
         <span className="m-tab"><MIcon name="sliders" size={10} />{T(["Filters", "تصفية"])}</span>
-        <span className="m-search"><MIcon name="search" size={11} />{T(["Search bookings...", "ابحث عن الحجوزات..."])}</span>
+        <span className="m-search"><MIcon name="search" size={11} />{T(["Search bookings...", "ابحث في الحجوزات..."])}</span>
       </div>
       <div className="m-card m-tbl">
         <div className="m-br th">
           <span>{T(["Booking", "الحجز"])}</span><span>{T(["Customer", "العميل"])}</span><span>{T(["Vehicle", "المركبة"])}</span>
-          <span>{T(["Service", "الخدمة"])}</span><span>{T(["Date/Time", "التاريخ/الوقت"])}</span><span>{T(["Status", "الحالة"])}</span>
-          <span className="e">{T(["Actions", "إجراءات"])}</span>
+          <span>{T(["Service", "الخدمة"])}</span><span>{T(["Date/Time", "التاريخ والوقت"])}</span><span>{T(["Status", "الحالة"])}</span>
+          <span className="e">{T(["Actions", "الإجراءات"])}</span>
         </div>
         <div className="m-rows">
           {newBooking && (
@@ -173,7 +173,7 @@ function BookingsScreen({ fmt, newBooking }) {
         </div>
         <div className="m-pg">
           <span>
-            {T(["Showing", "عرض"])} <b>{dg("1–7")}</b> {T(["of", "من"])}{" "}
+            {T(["Showing", "يعرض"])} <b>{dg("1–7")}</b> {T(["of", "من"])}{" "}
             <b key={newBooking ? "n" : "o"} className={newBooking ? "m-bump" : undefined}>{nf(MD.total + (newBooking ? 1 : 0))}</b>
           </span>
           <span>
@@ -224,11 +224,11 @@ function ServicesScreen({ fmt, svcOn, lit, onToggle, firstOffRef }) {
       </div>
       <div className="m-card m-busycard">
         <div>
-          <b>{T(["Busy Mode", "مشغول حالياً"])}</b>
-          <small>{T(["Let customers know you're busy and can't take bookings.", "أخبر عملاءك أنك مشغول ولا يمكنك استقبال حجوزات."])}</small>
-          <em>{T(["You're available — no busy times set.", "أنت متاح حالياً — لا توجد أوقات انشغال."])}</em>
+          <b>{T(["Busy Mode", "وضع الانشغال"])}</b>
+          <small>{T(["Let customers know you're busy and can't take bookings.", "أبلغ عملاءك أنك مشغول حاليًا ولا تستقبل حجوزات جديدة."])}</small>
+          <em>{T(["You're available — no busy times set.", "أنت متاح الآن — لا توجد فترات انشغال."])}</em>
         </div>
-        <span className="m-btn"><MIcon name="clock" size={12} />{T(["Set as busy", "تفعيل الانشغال"])}</span>
+        <span className="m-btn"><MIcon name="clock" size={12} />{T(["Set as busy", "تفعيل وضع الانشغال"])}</span>
       </div>
     </>
   );
@@ -336,7 +336,7 @@ const DashboardMock = forwardRef(function DashboardMock({ screen, visible, onNav
         const go = () => {
           setSvcOn((s) => s.map((v, i) => (i === k ? true : v)));
           setLit(k);
-          setToast({ show: true, done: true, icon: "ok", title: ["Service is now visible to customers", "الخدمة ظاهرة الآن للعملاء"], body: { text: MD.services[k].n } });
+          setToast({ show: true, done: true, icon: "ok", title: ["Service is now visible to customers", "أصبحت الخدمة ظاهرة للعملاء"], body: { text: MD.services[k].n } });
           later(() => { setToast((t) => ({ ...t, show: false })); cursorHide(); }, 2600);
         };
         if (rm) return go();
@@ -416,7 +416,7 @@ const DashboardMock = forwardRef(function DashboardMock({ screen, visible, onNav
             <span className="s"><MIcon name="star" size={12} /></span>
             <div>
               <b>{T(["Pro Plan", "الباقة الاحترافية"])}</b>
-              <small>{T(["Renews Jun 2026 · 12 jobs left today", "يتجدد يونيو 2026 · 12 مهمة متبقية اليوم"])}</small>
+              <small>{T(["Renews Jun 2026 · 12 jobs left today", "تتجدد في يونيو ٢٠٢٦ · ١٢ مهمة متبقية اليوم"])}</small>
             </div>
           </div>
         </aside>
@@ -424,7 +424,7 @@ const DashboardMock = forwardRef(function DashboardMock({ screen, visible, onNav
         <div className="m-main">
           <header className="m-top">
             <span className="m-burg"><MIcon name="menu" size={16} /></span>
-            <span className="m-busy"><MIcon name="clock" size={13} /><span>{T(["Busy Mode", "مشغول حالياً"])}</span></span>
+            <span className="m-busy"><MIcon name="clock" size={13} /><span>{T(["Busy Mode", "وضع الانشغال"])}</span></span>
             <div className="m-tr8">
               <span className="m-lang"><MIcon name="globe" size={11} />{isAr ? "EN" : "AR"}</span>
               <span className={`m-bell${bell.tick ? " ring" : ""}`} key={`bell-${bell.tick}`}>

@@ -22,12 +22,12 @@ function useSteps(t) {
   return [
     {
       n: t("01 · Dashboard", "01 · لوحة التحكم"),
-      h: <>{t("Your day, ", "يومك كله ")}<em>{t("at a glance.", "في نظرة.")}</em></>,
-      p: t("Today's bookings, cars in service, revenue and your rating — the second you open the dashboard.", "حجوزات النهارده، العربيات اللي في الصيانة، الإيراد وتقييمك — أول ما تفتح لوحة التحكم."),
+      h: <>{t("Your day, ", "يومك كله ")}<em>{t("at a glance.", "قدام عينك.")}</em></>,
+      p: t("Today's bookings, cars in service, revenue and your rating — the second you open the dashboard.", "حجوزات النهارده، العربيات اللي في الصيانة، الإيراد وتقييمك — كله قدامك أول ما تفتح لوحة التحكم."),
       li: [
         t("Today's schedule with every car and time", "جدول النهارده بكل عربية ومعادها"),
         t("Revenue this week, day by day", "إيراد الأسبوع يوم بيوم"),
-        t("An alert the moment a booking lands", "تنبيه أول ما يوصل حجز جديد"),
+        t("An alert the moment a booking lands", "تنبيه فوري أول ما يوصلك حجز جديد"),
       ],
     },
     {
@@ -35,19 +35,19 @@ function useSteps(t) {
       h: <>{t("Never miss ", "متفوتش ")}<em>{t("a booking.", "ولا حجز.")}</em></>,
       p: t("Requests land instantly with the car, the service and the time. Confirm in one tap and the customer knows right away.", "الطلب بيوصلك فورًا بالعربية والخدمة والمعاد. أكّد بضغطة — والعميل يعرف على طول."),
       li: [
-        t("Filter by today, week or month", "فلترة باليوم أو الأسبوع أو الشهر"),
-        t("Pending, confirmed, in progress — clear at a glance", "مستني، مؤكد، شغال — كله واضح"),
-        t("A booking number and full details for every car", "رقم لكل حجز وتفاصيله كاملة"),
+        t("Filter by today, week or month", "فلتر الحجوزات باليوم أو الأسبوع أو الشهر"),
+        t("Pending, confirmed, in progress — clear at a glance", "مستني، اتأكد، بيتعمل — كله واضح قدامك"),
+        t("A booking number and full details for every car", "رقم لكل حجز وكل تفاصيله"),
       ],
     },
     {
       n: t("03 · Services", "03 · الخدمات"),
       h: <>{t("Your menu, ", "خدماتك، ")}<em>{t("your prices.", "بأسعارك.")}</em></>,
-      p: t("Set a price range and duration for every service, show or hide it in one tap, and switch on Busy Mode when you're full.", "حدد سعر ومدة لكل خدمة، اظهرها أو اخفيها بضغطة، وشغّل وضع مشغول لما تكون مليان."),
+      p: t("Set a price range and duration for every service, show or hide it in one tap, and switch on Busy Mode when you're full.", "حدّد السعر والمدة لكل خدمة، اظهرها أو اخفيها بضغطة، وشغّل وضع الانشغال لما تكون مليان."),
       li: [
-        t("Price ranges customers can trust", "أسعار واضحة العميل يثق فيها"),
+        t("Price ranges customers can trust", "أسعار واضحة يثق فيها العميل"),
         t("Show or hide any service in one tap", "اظهر أو اخفي أي خدمة بضغطة"),
-        t("Busy Mode for your fully booked days", "وضع مشغول للأيام الزحمة"),
+        t("Busy Mode for your fully booked days", "وضع الانشغال للأيام الزحمة"),
       ],
     },
   ];
@@ -92,7 +92,7 @@ function BookingFlow() {
   const steps = [
     { icon: "mobile", h: t("Driver books", "العميل بيحجز"), p: t("Picks your center, the service and a time in the app.", "بيختار مركزك والخدمة والمعاد من التطبيق.") },
     { icon: "bell", h: t("You're notified", "بيوصلك فورًا"), p: t("Accept or reschedule from the dashboard in one tap.", "اقبل أو غيّر المعاد من لوحة التحكم بضغطة.") },
-    { icon: "wrench", h: t("Service & e-invoice", "خدمة وفاتورة رقمية"), p: t("The invoice lands in the driver's car history.", "الفاتورة بتتسجل في تاريخ العربية عند العميل.") },
+    { icon: "wrench", h: t("Service & e-invoice", "خدمة وفاتورة رقمية"), p: t("The invoice lands in the driver's car history.", "الفاتورة بتتسجل في سجل عربية العميل على طول.") },
     { icon: "star", h: t("Reviews bring more", "تقييم يجيب عملاء"), p: t("Great reviews help new drivers find you.", "التقييمات الحلوة بتساعد عملاء جداد يلاقوك.") },
   ];
 
@@ -212,7 +212,7 @@ export default function Workshops() {
             <h2>{t("Your whole workshop, ", "ورشتك كلها ")}<em>{t("on one screen.", "في شاشة واحدة.")}</em></h2>
           </div>
           <p className="lead rv" style={{ "--d": ".12s" }}>
-            {t("Bookings, revenue, services and reviews — all live in the Warsha dashboard. No paper, no missed calls, no guesswork.", "الحجوزات والإيراد والخدمات والتقييمات — كله لايف في لوحة تحكم ورشة. لا ورق، ولا مكالمات فايتة، ولا تخمين.")}
+            {t("Bookings, revenue, services and reviews — all live in the Warsha dashboard. No paper, no missed calls, no guesswork.", "الحجوزات والإيراد والخدمات والتقييمات — كله قدامك لحظة بلحظة في لوحة تحكم ورشة. من غير ورق، ولا مكالمات فايتة، ولا تخمين.")}
           </p>
         </div>
 
@@ -263,8 +263,8 @@ export default function Workshops() {
         <BookingFlow />
 
         <div className="ws-cta rv zm">
-          <a className="b bp mag" href="#centers">{t("Join as a workshop ↗", "انضم كورشة ↖")}</a>
-          <a className="b" href="#contact">{t("Ask for a demo", "اطلب ديمو")}</a>
+          <a className="b bp mag" href="#centers">{t("Join as a workshop ↗", "سجّل ورشتك ↖")}</a>
+          <a className="b" href="#contact">{t("Ask for a demo", "اطلب عرض تجريبي")}</a>
         </div>
       </div>
     </section>

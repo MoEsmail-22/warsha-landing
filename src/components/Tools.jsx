@@ -85,8 +85,6 @@ export default function Tools() {
           label={t("Coming next", "جاي قريب")}
           items={[
             { icon: "alert", label: t("Roadside SOS", "مساعدة على الطريق") },
-            { icon: "coin", label: t("Price estimates", "تقدير الأسعار") },
-            { icon: "fuel", label: t("Fuel log", "سجل البنزين") },
             { icon: "users", label: t("Family garage", "جراج العيلة") },
           ]}
         />
