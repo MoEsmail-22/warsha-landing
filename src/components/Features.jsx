@@ -13,12 +13,12 @@ export default function Features() {
   return (
     <section className="sec" id="features">
       <div className="w">
-        <div className="kick rv">{t("Everything in one place", "كل حاجة في مكان واحد")}</div>
+        <div className="kick rv">{t("Everything in one place", "تعبت من اللف؟")}</div>
         <h2 className="rv" style={{ "--d": ".08s" }}>
-          {t("A whole garage, ", "ورشة كاملة ")}<em>{t("in your pocket.", "في جيبك.")}</em>
+          {t("A whole garage, ", "سيبها ")}<em>{t("in your pocket.", "على ورشة.")}</em>
         </h2>
         <p className="lead rv" style={{ "--d": ".16s" }}>
-          {t("From finding a center to filing the last invoice, Warsha brings your car-care journey together.", "من أول ما تدوّر على مركز لحد ما تحتفظ بآخر فاتورة، ورشة بتجمع رحلة صيانة عربيتك.")}
+          {t("From finding a center to filing the last invoice, Warsha brings your car-care journey together.", "مش لازم تسأل ده وتجرّب ده. هتلاقي مركز تثق فيه، تحجز معادك بسهولة، وفواتيرك كلها محفوظة لحد ما تحتاجها.")}
         </p>
         <div className="bento" data-stg>
           {cards.map((c) => (
