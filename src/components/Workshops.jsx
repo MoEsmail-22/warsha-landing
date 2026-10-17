@@ -21,33 +21,33 @@ function useMedia(query) {
 function useSteps(t) {
   return [
     {
-      n: t("01 · Dashboard", "01 · لوحة التحكم"),
+      n: t("01 · Dashboard", "01 · الرئيسية"),
       h: <>{t("Your day, ", "يومك كله ")}<em>{t("at a glance.", "قدام عينك.")}</em></>,
-      p: t("Today's bookings, cars in service, revenue and your rating — the second you open the dashboard.", "حجوزات النهارده، العربيات اللي في الصيانة، الإيراد وتقييمك — كله قدامك أول ما تفتح لوحة التحكم."),
+      p: t("Today's bookings, cars in service, revenue and your rating — the second you open the dashboard.", "أول ما تفتح، هتلاقي حجوزات النهارده والعربيات اللي في الصيانة والإيراد وتقييمك."),
       li: [
-        t("Today's schedule with every car and time", "جدول النهارده بكل عربية ومعادها"),
+        t("Today's schedule with every car and time", "مواعيد النهارده بكل عربية وساعتها"),
         t("Revenue this week, day by day", "إيراد الأسبوع يوم بيوم"),
-        t("An alert the moment a booking lands", "تنبيه فوري أول ما يوصلك حجز جديد"),
+        t("An alert the moment a booking lands", "تنبيه أول ما يوصلك حجز جديد"),
       ],
     },
     {
       n: t("02 · Bookings", "02 · الحجوزات"),
-      h: <>{t("Never miss ", "متفوتش ")}<em>{t("a booking.", "ولا حجز.")}</em></>,
-      p: t("Requests land instantly with the car, the service and the time. Confirm in one tap and the customer knows right away.", "الطلب بيوصلك فورًا بالعربية والخدمة والمعاد. أكّد بضغطة — والعميل يعرف على طول."),
+      h: <>{t("Never miss ", "ولا حجز ")}<em>{t("a booking.", "هيفوتك.")}</em></>,
+      p: t("Requests land instantly with the car, the service and the time. Confirm in one tap and the customer knows right away.", "الحجز بيوصلك على طول بنوع العربية والخدمة والمعاد. تأكده بضغطة، والعميل بيعرف في ساعتها."),
       li: [
-        t("Filter by today, week or month", "فلتر الحجوزات باليوم أو الأسبوع أو الشهر"),
-        t("Pending, confirmed, in progress — clear at a glance", "مستني، اتأكد، بيتعمل — كله واضح قدامك"),
+        t("Filter by today, week or month", "فلتر بالنهارده أو الأسبوع أو الشهر"),
+        t("Pending, confirmed, in progress — clear at a glance", "مستني ولا مؤكد ولا شغالين فيه — كله واضح"),
         t("A booking number and full details for every car", "رقم لكل حجز وكل تفاصيله"),
       ],
     },
     {
       n: t("03 · Services", "03 · الخدمات"),
       h: <>{t("Your menu, ", "خدماتك، ")}<em>{t("your prices.", "بأسعارك.")}</em></>,
-      p: t("Set a price range and duration for every service, show or hide it in one tap, and switch on Busy Mode when you're full.", "حدّد السعر والمدة لكل خدمة، اظهرها أو اخفيها بضغطة، وشغّل وضع الانشغال لما تكون مليان."),
+      p: t("Set a price range and duration for every service, show or hide it in one tap, and switch on Busy Mode when you're full.", "حط سعر ومدة لكل خدمة، اظهرها أو اخفيها بضغطة، ولو الدنيا زحمة شغّل وضع مشغول."),
       li: [
-        t("Price ranges customers can trust", "أسعار واضحة يثق فيها العميل"),
-        t("Show or hide any service in one tap", "اظهر أو اخفي أي خدمة بضغطة"),
-        t("Busy Mode for your fully booked days", "وضع الانشغال للأيام الزحمة"),
+        t("Price ranges customers can trust", "أسعار واضحة تطمّن العميل"),
+        t("Show or hide any service in one tap", "تظهر أو تخفي أي خدمة بضغطة"),
+        t("Busy Mode for your fully booked days", "وضع مشغول للأيام الزحمة"),
       ],
     },
   ];
@@ -91,14 +91,14 @@ function BookingFlow() {
 
   const steps = [
     { icon: "mobile", h: t("Driver books", "العميل بيحجز"), p: t("Picks your center, the service and a time in the app.", "بيختار مركزك والخدمة والمعاد من التطبيق.") },
-    { icon: "bell", h: t("You're notified", "بيوصلك فورًا"), p: t("Accept or reschedule from the dashboard in one tap.", "اقبل أو غيّر المعاد من لوحة التحكم بضغطة.") },
-    { icon: "wrench", h: t("Service & e-invoice", "خدمة وفاتورة رقمية"), p: t("The invoice lands in the driver's car history.", "الفاتورة بتتسجل في سجل عربية العميل على طول.") },
-    { icon: "star", h: t("Reviews bring more", "تقييم يجيب عملاء"), p: t("Great reviews help new drivers find you.", "التقييمات الحلوة بتساعد عملاء جداد يلاقوك.") },
+    { icon: "bell", h: t("You're notified", "بيوصلك على طول"), p: t("Accept or reschedule from the dashboard in one tap.", "تأكده أو تغيّر المعاد من لوحة التحكم بضغطة.") },
+    { icon: "wrench", h: t("Service & e-invoice", "الخدمة والفاتورة"), p: t("The invoice lands in the driver's car history.", "الفاتورة بتتسجل في سجل عربية العميل على طول.") },
+    { icon: "star", h: t("Reviews bring more", "التقييم بيجيبلك زباين"), p: t("Great reviews help new drivers find you.", "كل تقييم حلو بيخلي عملاء جداد يلاقوك.") },
   ];
 
   return (
     <div className="ws-flow">
-      <div className="kick rv">{t("How a booking flows", "رحلة الحجز")}</div>
+      <div className="kick rv">{t("How a booking flows", "الحجز بيمشي إزاي")}</div>
       <h3 className="ws-fh rv" style={{ "--d": ".08s" }}>
         {t("From one tap in the app to ", "من ضغطة في التطبيق ")}<em>{t("a returning customer.", "لعميل بيرجعلك تاني.")}</em>
       </h3>
@@ -207,12 +207,12 @@ export default function Workshops() {
       <div className="w">
         <div className="ws-hd">
           <div className="rv">
-            <span className="ws-live"><i /><span>{t("Live dashboard preview", "معاينة حية للوحة التحكم")}</span></span>
+            <span className="ws-live"><i /><span>{t("Live dashboard preview", "شوف لوحة التحكم وهي شغالة")}</span></span>
             <div className="kick">{t("For workshops & service centers", "للورش ومراكز الصيانة")}</div>
             <h2>{t("Your whole workshop, ", "ورشتك كلها ")}<em>{t("on one screen.", "في شاشة واحدة.")}</em></h2>
           </div>
           <p className="lead rv" style={{ "--d": ".12s" }}>
-            {t("Bookings, revenue, services and reviews — all live in the Warsha dashboard. No paper, no missed calls, no guesswork.", "الحجوزات والإيراد والخدمات والتقييمات — كله قدامك لحظة بلحظة في لوحة تحكم ورشة. من غير ورق، ولا مكالمات فايتة، ولا تخمين.")}
+            {t("Bookings, revenue, services and reviews — all live in the Warsha dashboard. No paper, no missed calls, no guesswork.", "الحجوزات والإيراد والخدمات والتقييمات — كله قدامك لحظة بلحظة في لوحة تحكم ورشة. من غير ورق، ولا مكالمات فايتة، ولا حسابات في الهوا.")}
           </p>
         </div>
 
@@ -252,11 +252,11 @@ export default function Workshops() {
           className="ws-also"
           label={t("Also inside", "وكمان جوّه اللوحة")}
           items={[
-            { icon: "puzzle", label: t("Jobs Board", "لوحة المهام") },
+            { icon: "puzzle", label: t("Jobs Board", "متابعة الشغل") },
             { icon: "receipt", label: t("Quotes", "عروض الأسعار") },
             { icon: "star", label: t("Reviews", "التقييمات") },
             { icon: "tag", label: t("Offers", "العروض والخصومات") },
-            { icon: "car", label: t("Vehicle catalog", "كتالوج الماركات") },
+            { icon: "car", label: t("Vehicle catalog", "ماركات العربيات") },
           ]}
         />
 

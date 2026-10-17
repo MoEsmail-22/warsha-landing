@@ -39,8 +39,8 @@ function DashScreen({ fmt, sel, onSelect, onNavigate, firstKpi }) {
   return (
     <>
       <div className="m-h">
-        <h4>{fmt.greet()}{T([", ", "، "])}{T(MD.user.n)} 👋</h4>
-        <p>{T(["Here's what's happening at your workshop today.", "إليك ملخص يومك في الورشة."])}</p>
+        <h4>{fmt.greet()}{T([", ", " يا "])}{T(MD.user.n)} 👋</h4>
+        <p>{T(["Here's what's happening at your workshop today.", "ده ملخص اللي بيحصل في الورشة النهارده."])}</p>
       </div>
       <div className="m-kpis">
         {MD.kpi.map((k, i) => {
@@ -61,19 +61,19 @@ function DashScreen({ fmt, sel, onSelect, onNavigate, firstKpi }) {
       <div className="m-two">
         <div className="m-card m-sched">
           <div className="m-ct">
-            <b>{T(["Today's Schedule", "جدول اليوم"])}</b>
+            <b>{T(["Today's Schedule", "مواعيد النهارده"])}</b>
             <button className="m-va" type="button" onClick={() => onNavigate(1)}>
-              {T(["View all", "عرض الكل"])}<MIcon name={fmt.locale === "ar-EG" ? "chl" : "chr"} size={11} />
+              {T(["View all", "شوف الكل"])}<MIcon name={fmt.locale === "ar-EG" ? "chl" : "chr"} size={11} />
             </button>
           </div>
           <div className="m-sr th">
-            <span>{T(["Customer", "العميل"])}</span><span>{T(["Service", "الخدمة"])}</span><span>{T(["Time", "الوقت"])}</span><span>{T(["Status", "الحالة"])}</span>
+            <span>{T(["Customer", "العميل"])}</span><span>{T(["Service", "الخدمة"])}</span><span>{T(["Time", "المعاد"])}</span><span>{T(["Status", "الحالة"])}</span>
           </div>
           {MD.sched.map((p, i) => (
             <div className="m-sr rw" style={{ "--i": i }} key={p.i}>
               <span className="m-cu"><Avatar p={p} /><div><b>{T(p.n)}</b><small>{p.v}</small></div></span>
               <span>{T(p.s)}</span>
-              <span className="m-tm">{dg(p.t)}</span>
+              <span className="m-tm">{fmt.time(p.t)}</span>
               <span><Badge st={p.st} fmt={fmt} /></span>
             </div>
           ))}
@@ -81,8 +81,8 @@ function DashScreen({ fmt, sel, onSelect, onNavigate, firstKpi }) {
         <div className="m-card m-rev">
           <div className="m-rh">
             <div>
-              <b>{T(["Revenue this week", "إيرادات الأسبوع"])}</b>
-              <small>{T(["Tap a bar to see details", "اضغط على أي عمود لعرض التفاصيل"])}</small>
+              <b>{T(["Revenue this week", "إيراد الأسبوع"])}</b>
+              <small>{T(["Tap a bar to see details", "دوس على أي يوم تشوف تفاصيله"])}</small>
             </div>
             <div className="m-sel">
               <small>{T(DAYS[sel])}</small>
@@ -91,7 +91,7 @@ function DashScreen({ fmt, sel, onSelect, onNavigate, firstKpi }) {
           </div>
           <div className="m-tot">
             <span><CountUp to={total} fmt={fmt} /></span> <small>{egp()}</small>
-            <small className="l">{T(["Total this week", "إجمالي الأسبوع"])}</small>
+            <small className="m-totl">{T(["Total this week", "إجمالي الأسبوع"])}</small>
           </div>
           <div className="m-bars">
             {wk.map((v, i) => (
@@ -125,7 +125,7 @@ function BookingRow({ p, k, cls, no, fmt, status, onCancel }) {
       <span className="m-cu"><Avatar p={p} /><b>{T(p.n)}</b></span>
       <span>{p.v}</span>
       <span>{T(p.s)}</span>
-      <span className="m-dt"><b>{fdate(d)}</b><small>{dg(p.t)}</small></span>
+      <span className="m-dt"><b>{fdate(d)}</b><small>{fmt.time(p.t)}</small></span>
       <span><Badge st={st} fmt={fmt} /></span>
       <span className="m-act">
         {st === "pending" && <em className="m-cx">{T(["Cancel", "إلغاء"])}</em>}
@@ -143,20 +143,20 @@ function BookingsScreen({ fmt, newBooking }) {
     <>
       <div className="m-h">
         <h4>{T(["Bookings", "الحجوزات"])}</h4>
-        <p>{T(["Manage and schedule incoming service requests.", "إدارة وجدولة طلبات الخدمة الواردة."])}</p>
+        <p>{T(["Manage and schedule incoming service requests.", "كل طلبات الحجز اللي جاتلك في مكان واحد."])}</p>
       </div>
       <div className="m-fil">
-        {[["All", "الكل"], ["Today", "اليوم"], ["Week", "الأسبوع"], ["Month", "الشهر"]].map((l, i) => (
+        {[["All", "الكل"], ["Today", "النهارده"], ["Week", "الأسبوع ده"], ["Month", "الشهر ده"]].map((l, i) => (
           <span key={i} className={`m-tab${i ? "" : " on"}`}>{T(l)}</span>
         ))}
-        <span className="m-tab"><MIcon name="sliders" size={10} />{T(["Filters", "تصفية"])}</span>
-        <span className="m-search"><MIcon name="search" size={11} />{T(["Search bookings...", "ابحث في الحجوزات..."])}</span>
+        <span className="m-tab"><MIcon name="sliders" size={10} />{T(["Filters", "فلترة"])}</span>
+        <span className="m-search"><MIcon name="search" size={11} />{T(["Search bookings...", "دوّر على حجز..."])}</span>
       </div>
       <div className="m-card m-tbl">
         <div className="m-br th">
-          <span>{T(["Booking", "الحجز"])}</span><span>{T(["Customer", "العميل"])}</span><span>{T(["Vehicle", "المركبة"])}</span>
-          <span>{T(["Service", "الخدمة"])}</span><span>{T(["Date/Time", "التاريخ والوقت"])}</span><span>{T(["Status", "الحالة"])}</span>
-          <span className="e">{T(["Actions", "الإجراءات"])}</span>
+          <span>{T(["Booking", "رقم الحجز"])}</span><span>{T(["Customer", "العميل"])}</span><span>{T(["Vehicle", "العربية"])}</span>
+          <span>{T(["Service", "الخدمة"])}</span><span>{T(["Date/Time", "المعاد"])}</span><span>{T(["Status", "الحالة"])}</span>
+          <span className="e">{T(["Actions", "خيارات"])}</span>
         </div>
         <div className="m-rows">
           {newBooking && (
@@ -173,7 +173,7 @@ function BookingsScreen({ fmt, newBooking }) {
         </div>
         <div className="m-pg">
           <span>
-            {T(["Showing", "يعرض"])} <b>{dg("1–7")}</b> {T(["of", "من"])}{" "}
+            {T(["Showing", ""])} <b>{dg("1–7")}</b> {T(["of", "من"])}{" "}
             <b key={newBooking ? "n" : "o"} className={newBooking ? "m-bump" : undefined}>{nf(MD.total + (newBooking ? 1 : 0))}</b>
           </span>
           <span>
@@ -189,7 +189,7 @@ const Toggle = forwardRef(function Toggle({ on, onClick, fmt }, ref) {
   return (
     <span className={`m-tg${on ? " on" : ""}`} role="switch" aria-checked={on} onClick={onClick}>
       <i ref={ref} />
-      <span>{fmt.T(on ? ["Active", "نشطة"] : ["Inactive", "غير نشطة"])}</span>
+      <span>{fmt.T(on ? ["Active", "ظاهرة"] : ["Inactive", "مخفية"])}</span>
     </span>
   );
 });
@@ -202,14 +202,14 @@ function ServicesScreen({ fmt, svcOn, lit, onToggle, firstOffRef }) {
       <div className="m-hrow">
         <div className="m-h">
           <h4>{T(["Services & Pricing", "الخدمات والأسعار"])}</h4>
-          <p>{T(["Control what you offer and what customers see.", "تحكم في الخدمات التي تقدمها وما يراه العملاء."])}</p>
+          <p>{T(["Control what you offer and what customers see.", "حدد خدماتك وأسعارها، واللي العميل يشوفه."])}</p>
         </div>
-        <span className="m-btn"><MIcon name="plus" size={12} />{T(["Add Service", "إضافة خدمة"])}</span>
+        <span className="m-btn"><MIcon name="plus" size={12} />{T(["Add Service", "ضيف خدمة"])}</span>
       </div>
       <div className="m-card m-tbl m-svt">
         <div className="m-sv th">
-          <span>{T(["Service Name", "اسم الخدمة"])}</span><span>{T(["Category", "الفئة"])}</span><span>{T(["Duration", "المدة"])}</span>
-          <span>{T(["Price", "السعر"])}</span><span>{T(["Status", "الحالة"])}</span><span className="e">{T(["Actions", "الإجراءات"])}</span>
+          <span>{T(["Service Name", "الخدمة"])}</span><span>{T(["Category", "النوع"])}</span><span>{T(["Duration", "المدة"])}</span>
+          <span>{T(["Price", "السعر"])}</span><span>{T(["Status", "الحالة"])}</span><span className="e">{T(["Actions", "خيارات"])}</span>
         </div>
         {MD.services.map((s, k) => (
           <div className={`m-sv rw${lit === k ? " lit" : ""}`} style={{ "--i": k }} key={k}>
@@ -224,11 +224,11 @@ function ServicesScreen({ fmt, svcOn, lit, onToggle, firstOffRef }) {
       </div>
       <div className="m-card m-busycard">
         <div>
-          <b>{T(["Busy Mode", "وضع الانشغال"])}</b>
-          <small>{T(["Let customers know you're busy and can't take bookings.", "أبلغ عملاءك أنك مشغول حاليًا ولا تستقبل حجوزات جديدة."])}</small>
-          <em>{T(["You're available — no busy times set.", "أنت متاح الآن — لا توجد فترات انشغال."])}</em>
+          <b>{T(["Busy Mode", "وضع مشغول"])}</b>
+          <small>{T(["Let customers know you're busy and can't take bookings.", "قول لعملاءك إنك مليان ومش هتستقبل حجوزات دلوقتي."])}</small>
+          <em>{T(["You're available — no busy times set.", "إنت متاح دلوقتي — مفيش أوقات مشغول متسجلة."])}</em>
         </div>
-        <span className="m-btn"><MIcon name="clock" size={12} />{T(["Set as busy", "تفعيل وضع الانشغال"])}</span>
+        <span className="m-btn"><MIcon name="clock" size={12} />{T(["Set as busy", "فعّل وضع مشغول"])}</span>
       </div>
     </>
   );
@@ -292,7 +292,7 @@ const DashboardMock = forwardRef(function DashboardMock({ screen, visible, onNav
 
   const confirmBooking = useCallback(() => {
     setNewBooking("confirmed");
-    setToast({ show: true, done: true, icon: "ok", title: ["Booking status updated", "تم تحديث حالة الحجز"], body: { nb: true, status: "confirmed" } });
+    setToast({ show: true, done: true, icon: "ok", title: ["Booking status updated", "الحجز اتأكد"], body: { nb: true, status: "confirmed" } });
     ringBell(2);
     later(() => { setToast((t) => ({ ...t, show: false })); cursorHide(); }, 2600);
   }, [later]);
@@ -313,7 +313,7 @@ const DashboardMock = forwardRef(function DashboardMock({ screen, visible, onNav
       later(() => {
         setFirstKpi(13);
         ringBell(3);
-        setToast({ show: true, icon: "bell", title: ["New booking request", "طلب حجز جديد"], body: { nb: true, short: true } });
+        setToast({ show: true, icon: "bell", title: ["New booking request", "وصلك حجز جديد"], body: { nb: true, short: true } });
         later(() => setToast((t) => ({ ...t, show: false })), 3400);
       }, 3200);
     }
@@ -322,7 +322,7 @@ const DashboardMock = forwardRef(function DashboardMock({ screen, visible, onNav
       later(() => {
         setNewBooking("pending");
         ringBell(3);
-        setToast({ show: true, icon: "bell", title: ["New booking request", "طلب حجز جديد"], body: { nb: true, full: true }, buttons: true });
+        setToast({ show: true, icon: "bell", title: ["New booking request", "وصلك حجز جديد"], body: { nb: true, full: true }, buttons: true });
         if (rm) return later(confirmBooking, 3000);
         later(() => { cursorStart(); cursorTo(okRef.current); }, 1500);
         later(cursorClick, 2750);
@@ -336,7 +336,7 @@ const DashboardMock = forwardRef(function DashboardMock({ screen, visible, onNav
         const go = () => {
           setSvcOn((s) => s.map((v, i) => (i === k ? true : v)));
           setLit(k);
-          setToast({ show: true, done: true, icon: "ok", title: ["Service is now visible to customers", "أصبحت الخدمة ظاهرة للعملاء"], body: { text: MD.services[k].n } });
+          setToast({ show: true, done: true, icon: "ok", title: ["Service is now visible to customers", "الخدمة بقت ظاهرة للعملاء"], body: { text: MD.services[k].n } });
           later(() => { setToast((t) => ({ ...t, show: false })); cursorHide(); }, 2600);
         };
         if (rm) return go();
@@ -367,7 +367,7 @@ const DashboardMock = forwardRef(function DashboardMock({ screen, visible, onNav
         <>
           {T(nb.n)} · {nb.v}
           <br />
-          {T(nb.s)} · {T(["Today", "اليوم"])} {fmt.dg(nb.t)}
+          {T(nb.s)} · {T(["Today", "النهارده"])} {fmt.time(nb.t)}
         </>
       );
     return null;
@@ -415,8 +415,8 @@ const DashboardMock = forwardRef(function DashboardMock({ screen, visible, onNav
           <div className="m-pro">
             <span className="s"><MIcon name="star" size={12} /></span>
             <div>
-              <b>{T(["Pro Plan", "الباقة الاحترافية"])}</b>
-              <small>{T(["Renews Jun 2026 · 12 jobs left today", "تتجدد في يونيو ٢٠٢٦ · ١٢ مهمة متبقية اليوم"])}</small>
+              <b>{T(["Pro Plan", "باقة Pro"])}</b>
+              <small>{T(["Renews Jun 2026 · 12 jobs left today", "بتتجدد يونيو ٢٠٢٦ · فاضلك ١٢ طلب النهارده"])}</small>
             </div>
           </div>
         </aside>
@@ -424,7 +424,7 @@ const DashboardMock = forwardRef(function DashboardMock({ screen, visible, onNav
         <div className="m-main">
           <header className="m-top">
             <span className="m-burg"><MIcon name="menu" size={16} /></span>
-            <span className="m-busy"><MIcon name="clock" size={13} /><span>{T(["Busy Mode", "وضع الانشغال"])}</span></span>
+            <span className="m-busy"><MIcon name="clock" size={13} /><span>{T(["Busy Mode", "وضع مشغول"])}</span></span>
             <div className="m-tr8">
               <span className="m-lang"><MIcon name="globe" size={11} />{isAr ? "EN" : "AR"}</span>
               <span className={`m-bell${bell.tick ? " ring" : ""}`} key={`bell-${bell.tick}`}>
@@ -456,8 +456,8 @@ const DashboardMock = forwardRef(function DashboardMock({ screen, visible, onNav
                 <small>{toastBody()}</small>
                 {toast.buttons && (
                   <div className="tb">
-                    <span className="ok" ref={okRef} role="button" tabIndex={0} onClick={onOk}>{T(["Confirm", "تأكيد"])}</span>
-                    <span>{T(["View", "عرض"])}</span>
+                    <span className="ok" ref={okRef} role="button" tabIndex={0} onClick={onOk}>{T(["Confirm", "أكّد"])}</span>
+                    <span>{T(["View", "شوف"])}</span>
                   </div>
                 )}
               </div>

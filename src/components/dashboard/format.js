@@ -10,11 +10,11 @@ export const makeFormat = (isAr) => {
   const duration = (m) => {
     const h = Math.floor(m / 60), mi = m % 60, p = [];
     if (isAr) {
-      if (h === 1) p.push("ساعة");
-      else if (h === 2) p.push("ساعتان");
-      else if (h > 2) p.push(`${nf(h)} ${h <= 10 ? "ساعات" : "ساعة"}`);
-      if (mi > 0) p.push(`${nf(mi)} دقيقة`);
-      return p.join(" و ");
+      // Egyptian style: "ساعة ونص", "ساعة وربع", "٤٥ دقيقة"
+      if (!h) return `${nf(mi)} دقيقة`;
+      const hours = h === 1 ? "ساعة" : h === 2 ? "ساعتين" : `${nf(h)} ساعات`;
+      const rest = { 0: "", 15: " وربع", 30: " ونص", 45: " وتلت ربع" }[mi];
+      return hours + (rest ?? ` و${nf(mi)} دقيقة`);
     }
     if (h > 0) p.push(`${h} ${h === 1 ? "hr" : "hrs"}`);
     if (mi > 0) p.push(`${mi} min`);
@@ -23,6 +23,12 @@ export const makeFormat = (isAr) => {
   const price = (p) => `${nf(p[0])} – ${nf(p[1])} ${egp()}`;
   // "+12%" → "+١٢٪" in Arabic; render inside <bdi dir="ltr"> so the sign stays in front
   const num = (s) => (isAr ? dg(s).replace("%", "٪") : s);
+  // "14:00" → "٢:٠٠ م" in Arabic; English keeps 24h
+  const time = (t) => {
+    if (!isAr) return t;
+    const [h, m] = t.split(":").map(Number);
+    return `${dg(`${h % 12 || 12}:${String(m).padStart(2, "0")}`)} ${h < 12 ? "ص" : "م"}`;
+  };
   const greet = () => T(["Good morning", "صباح الخير"]);
-  return { T, nf, dg, num, egp, fdate, ymd, duration, price, greet, locale };
+  return { T, nf, dg, num, egp, fdate, ymd, duration, price, time, greet, locale };
 };
