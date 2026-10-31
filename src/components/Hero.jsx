@@ -77,7 +77,7 @@ export default function Hero() {
             )}
           </p>
           <div className="acts ld" style={{ "--d": ".5s" }}>
-            <a className="b bp mag sheen" href="#install">{t("Install now ↗", "نزّل التطبيق دلوقتي ↖")}</a>
+            <a className="b bp mag sheen" href="#install">{t("Stay tuned ↗", "خليك متابع ↖")}</a>
             <a className="b" href="#workshops">{t("I run a service center", "أنا مركز صيانة")}</a>
           </div>
         </div>
